@@ -2,6 +2,7 @@
 #include "osKernel.h"
 #include "stm32f411xe.h"
 
+
 /* Idle Task */
 extern void IdleTask(void);
 
@@ -14,6 +15,7 @@ typedef struct {
     osKernelSem_t * volatile waitingOn; /* Semaphore the task waits on (valid while WAITING) */
     void (*taskHandler)(void);      	/* Task entry point function */
 } TCB_t;
+
 
 /* Kernel Control Structure */
 typedef struct {
@@ -59,6 +61,7 @@ static void osKernelTaskExit(void) {
 
 	while(1);
 }
+
 
 void osKernelAddTask(void(*taskHandler)(void)) {
 	if (osKernel.taskCount >= MAX_TASKS)
@@ -130,9 +133,6 @@ void osKernelLaunch(void) {
 	/* Start Kernel */
 	osKernelSTART(pspVal);
 }
-
-
-
 
 
 void osKernelTaskDelay(uint32_t tickCount) {

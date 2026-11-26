@@ -1,8 +1,8 @@
 #include "osKernel.h"
-#include "led.h"
 #include "faults.h"
 #include "uart.h"
 #include "sensor.h"
+#include "led.h"
 
 
 #define FIFO_SIZE	32
@@ -64,7 +64,7 @@ void LedTask(void)
 	while(1){
 		ledProfiler++;
 		led_toggle();
-		osKernelTaskDelay(100);
+		osKernelTaskDelay(1000 / OS_QUANTA);
 	}
 }
 
@@ -82,7 +82,7 @@ void ProducerTask(void)
 		else
 			sensorErrors++;
 
-		osKernelTaskDelay(50);
+		osKernelTaskDelay(500 /OS_QUANTA);
 	}
 }
 
